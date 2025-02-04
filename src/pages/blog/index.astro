@@ -14,7 +14,7 @@ const posts = (await getCollection("blog", post => !post.data.hide)).sort(
   <div class="blog-posts">
     {
       posts.map(post => {
-        const excerpt = createExcerpt(post.body ?? '');
+        const excerpt = createExcerpt(post.body ?? '', post.data);
         return (<article class="postSummary">
           <aside>
             <span>

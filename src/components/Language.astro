@@ -1,0 +1,12 @@
+---
+
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"span">;
+
+const { lang, ...props } = Astro.props;
+---
+
+<span lang={lang} {...props}>
+    <slot />
+</span>

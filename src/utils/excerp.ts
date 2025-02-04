@@ -1,8 +1,12 @@
 import MarkdownIt from 'markdown-it';
+import type {BlogData} from "../content.config.ts";
 const parser = new MarkdownIt();
 
-// https://www.paulie.dev/posts/2023/09/how-to-create-excerpts-with-astro/
-export const createExcerpt = (body: string) => {
+export const createExcerpt = (body: string, data: BlogData) => {
+    if(data.excerpt) {
+        return data.excerpt;
+    }
+
     const full = parser
         .render(body)
         .split('\n')

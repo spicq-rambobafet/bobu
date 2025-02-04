@@ -188,6 +188,7 @@ footer {
   display: block;
   width: 30%;
   border-bottom: 1px dotted #000;
+  margin-bottom: 20px;
 }
 
 .postSummary_excerpt {
