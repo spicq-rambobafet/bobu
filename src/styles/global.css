@@ -172,8 +172,20 @@ footer {
   padding: unset;
 }
 
-.blog-posts article {
+.postSummary {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.postSummary:not(:last-of-type)::after {
+  content: '';
+  display: block;
+  width: 30%;
+  border-bottom: 1px dotted #000;
+}
+
+.postSummary_excerpt {
+  flex-basis: 100%;
 }
 
 .blog-posts article aside {

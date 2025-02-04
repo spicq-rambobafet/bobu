@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
 import { generateURL } from "../../utils";
+import {createExcerpt} from "../../utils/excerp";
 
 const posts = (await getCollection("blog", post => !post.data.hide)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -12,21 +13,23 @@ const posts = (await getCollection("blog", post => !post.data.hide)).sort(
 <Layout>
   <div class="blog-posts">
     {
-      posts.map(post => (
-        <article>
+      posts.map(post => {
+        const excerpt = createExcerpt(post.body ?? '');
+        return (<article class="postSummary">
           <aside>
             <span>
-              <FormattedDate date={post.data.pubDate} />
+              <FormattedDate date={post.data.pubDate}/>
             </span>
           </aside>
           <a
-            href={generateURL(`/blog/${post.id}/`)}
-            transition:name={`post-title-${post.id}`}
+              href={generateURL(`/blog/${post.id}/`)}
+              transition:name={`post-title-${post.id}`}
           >
             {post.data.title}
           </a>
-        </article>
-      ))
+          <p class="postSummary_excerpt">{excerpt}</p>
+        </article>)
+      })
     }
   </div>
 </Layout>

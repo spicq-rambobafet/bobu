@@ -5,7 +5,7 @@ import icons, { getSizedIcon } from "../assets/icons";
 
 <footer>
   <small>
-    Propulsé par un fork de <a href="https://github.com/ChurchTao/PlainPage" target="_blank"
+    Propulsé par un fork de <a href="https://github.com/ChurchTao/PlainPage" target="_blank" rel="noopener noreferrer"
       >PlainPage(素纸)</a
     >
   </small>
@@ -17,7 +17,9 @@ import icons, { getSizedIcon } from "../assets/icons";
   <div class="social-links" role="navigation" aria-label="social links">
     {
       Object.entries(SOCIAL_LINKS).map(([key, value]) => {
-        if (!value) return null;
+        if (!value) {
+          return null;
+        }
         return (
           <a
             href={value}
