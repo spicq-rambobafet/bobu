@@ -177,6 +177,12 @@ footer {
   flex-wrap: wrap;
 }
 
+.postSummary__title {
+  font-size: inherit;
+  display: inline-block;
+  margin: 0;
+}
+
 .postSummary:not(:last-of-type)::after {
   content: '';
   display: block;

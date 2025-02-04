@@ -21,13 +21,16 @@ const posts = (await getCollection("blog", post => !post.data.hide)).sort(
               <FormattedDate date={post.data.pubDate}/>
             </span>
           </aside>
-          <a
+          <h2 class="postSummary__title">
+            {post.data.title}
+          </h2>
+          <p class="postSummary__excerpt">{excerpt} <a
               href={generateURL(`/blog/${post.id}/`)}
               transition:name={`post-title-${post.id}`}
           >
-            {post.data.title}
-          </a>
-          <p class="postSummary_excerpt">{excerpt}</p>
+            Lire la suite
+          </a></p>
+
         </article>)
       })
     }
