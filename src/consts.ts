@@ -21,16 +21,10 @@ export const SEO_CONFIG = {
 export const NAV_ITEMS = [
   { text: "Accueil", link: "/" },
   { text: "Blog", link: "/blog" },
-  { text: "Tags", link: "/tags" },
 ];
 
 export const BLOG_CONFIG = {
   locale: "fr-fr",
   profile: "https://github.com/spicq-rambobafet",
-  authorName: "Bobu",
-  // email: "mailto:your-email@example.com",
-  tags: {
-    title: "Tags",
-    description: "Tous les tags utilisés sur le site",
-  },
+  authorName: "Bobu"
 };

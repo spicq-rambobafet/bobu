@@ -2,15 +2,21 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
-import { generateURL } from "../../utils";
+import {generateURL, getUniqueTags} from "../../utils";
 import {createExcerpt} from "../../utils/excerp";
+import Tags from "../../components/Tags.astro";
 
 const posts = (await getCollection("blog", post => !post.data.hide)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const tags = getUniqueTags(posts);
 ---
 
 <Layout>
+  <nav aria-label="Navigation par tags">
+    <Tags tags={tags} />
+  </nav>
   <div class="blog-posts">
     {
       posts.map(post => {
