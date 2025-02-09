@@ -1,9 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
-import {generateURL, getUniqueTags} from "../../utils";
-import {createExcerpt} from "../../utils/excerp";
+import Article from "../../components/Article.astro";
+import { getUniqueTags} from "../../utils";
 import Tags from "../../components/Tags.astro";
 
 const posts = (await getCollection("blog", post => !post.data.hide)).sort(
@@ -20,30 +19,10 @@ const tags = getUniqueTags(posts);
   <div class="blog-posts">
     {
       posts.map(post => {
-        const excerpt = createExcerpt(post.body ?? '', post.data);
-        return (<article class="postSummary">
-          <header>
-            <span class="postSummary__date">
-              <FormattedDate date={post.data.pubDate}/>
-            </span>
-            <h2 class="postSummary__title">
-              {post.data.title}
-            </h2>
-            <ul  class="postSummary__tags">
-              {post.data.tags.map(tag => (
-                  <li class="postSummary__tag">#{tag}</li>
-              ))}
-            </ul>
-          </header>
-          <p class="postSummary__excerpt">{excerpt}
-            <a
-              href={generateURL(`/blog/${post.id}/`)}
-              transition:name={`post-title-${post.id}`}
-            >
-            Lire la suite
-          </a>
-          </p>
-        </article>)
+        return (
+            <Article
+              post={post} />
+        )
       })
     }
   </div>

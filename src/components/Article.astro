@@ -1,0 +1,37 @@
+---
+import {generateURL} from "../utils";
+import FormattedDate from "./FormattedDate.astro";
+import {createExcerpt} from "../utils/excerp";
+import type {CollectionEntry} from "astro:content";
+
+type Props = {
+    post: CollectionEntry<"blog">
+};
+
+const { post } = Astro.props;
+const excerpt = createExcerpt(post.body ?? '', post.data);
+---
+
+<article class="postSummary">
+    <header>
+            <span class="postSummary__date">
+              <FormattedDate date={post.data.pubDate}/>
+            </span>
+        <h2 class="postSummary__title">
+            {post.data.title}
+        </h2>
+        <ul  class="postSummary__tags">
+            {post.data.tags.map(tag => (
+                    <li class="postSummary__tag">#{tag}</li>
+            ))}
+        </ul>
+    </header>
+    <p class="postSummary__excerpt">{excerpt}
+        <a
+                href={generateURL(`/blog/${post.id}/`)}
+                transition:name={`post-title-${post.id}`}
+        >
+            Lire la suite
+        </a>
+    </p>
+</article>

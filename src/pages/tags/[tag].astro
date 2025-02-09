@@ -3,14 +3,13 @@ import Layout from "../../layouts/Layout.astro";
 import type { GetStaticPaths } from "astro";
 import { type CollectionEntry, getCollection } from "astro:content";
 import {
-  generateURL,
   getPostsByTag,
   getUniqueTags,
   encodeTag,
   decodeTag,
 } from "../../utils";
-import FormattedDate from "../../components/FormattedDate.astro";
 import IconLink from "../../components/IconLink.astro";
+import Article from "../../components/Article.astro";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("blog", post => !post.data.hide);
@@ -34,31 +33,22 @@ const { tag, posts } = Astro.props;
 
 <Layout>
   <span class="back-link">
-    <IconLink name="Back" label="Back" extra="Go Back" back />
+    <IconLink name="Back" label="Back" extra="Retour" back />
   </span>
   <h1>
     Tags: <span transition:name={`tag-${tag}`}>#{decodeTag(tag)}</span>
   </h1>
   <p>
-    {posts.length} posts tagged with {decodeTag(tag)}.
+    {posts.length} articles avec le tag {decodeTag(tag)}.
   </p>
   <ul class="blog-posts">
     {
-      posts.map(post => (
-        <li>
-          <span>
-            <i>
-              <FormattedDate date={post.data.pubDate} />
-            </i>
-          </span>
-          <a
-            href={generateURL(`/blog/${post.id}/`)}
-            transition:name={`post-title-${post.id}`}
-          >
-            {post.data.title}
-          </a>
-        </li>
-      ))
+      posts.map(post => {
+        return (
+            <Article
+                post={post} />
+        )
+      })
     }
   </ul>
 </Layout>
