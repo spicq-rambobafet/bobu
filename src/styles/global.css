@@ -9,7 +9,7 @@
   --min-height: 100vh;
   --font-main: Verdana, sans-serif;
   --font-secondary: Verdana, sans-serif;
-  --font-scale: 1em;
+  --font-scale: 1.6rem;
   --background-color: #fffcf5;
   --heading-color: #222;
   --text-color: #444;
@@ -33,6 +33,10 @@
   --code-color: #ddd;
   --blockquote-color: #ccc;
   --code-border-color: #ffe183;
+}
+
+html {
+  font-size: 62.5%;
 }
 
 body {
@@ -193,6 +197,18 @@ footer {
 
 .postSummary_excerpt {
   flex-basis: 100%;
+}
+
+.postSummary__tags {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.postSummary__tag {
+  margin-right: 1.5em;
 }
 
 .blog-posts article aside {

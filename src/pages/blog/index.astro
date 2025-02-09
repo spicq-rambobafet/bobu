@@ -22,21 +22,27 @@ const tags = getUniqueTags(posts);
       posts.map(post => {
         const excerpt = createExcerpt(post.body ?? '', post.data);
         return (<article class="postSummary">
-          <aside>
-            <span>
+          <header>
+            <span class="postSummary__date">
               <FormattedDate date={post.data.pubDate}/>
             </span>
-          </aside>
-          <h2 class="postSummary__title">
-            {post.data.title}
-          </h2>
-          <p class="postSummary__excerpt">{excerpt} <a
+            <h2 class="postSummary__title">
+              {post.data.title}
+            </h2>
+            <ul  class="postSummary__tags">
+              {post.data.tags.map(tag => (
+                  <li class="postSummary__tag">#{tag}</li>
+              ))}
+            </ul>
+          </header>
+          <p class="postSummary__excerpt">{excerpt}
+            <a
               href={generateURL(`/blog/${post.id}/`)}
               transition:name={`post-title-${post.id}`}
-          >
+            >
             Lire la suite
-          </a></p>
-
+          </a>
+          </p>
         </article>)
       })
     }
