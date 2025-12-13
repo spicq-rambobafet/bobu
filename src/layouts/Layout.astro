@@ -9,6 +9,7 @@ const {
   description = SITE_DESCRIPTION,
   heroImage,
   structuredData,
+  lang = 'fr'
 } = Astro.props;
 
 type Props = {
@@ -16,11 +17,12 @@ type Props = {
   description?: string;
   heroImage?: string;
   structuredData?: string;
+  lang?: string;
 };
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <BaseHead
       title={title}
