@@ -270,3 +270,14 @@ pre.astro-code {
   border-radius: 6px;
   padding: 12px;
 }
+
+.footer__links {
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__sitemap {
+    margin-right: 13px;
+}
