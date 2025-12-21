@@ -1,0 +1,47 @@
+---
+import {getCollection} from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import {getUniqueTags} from "../utils";
+
+const posts = await getCollection("blog", post => !post.data.hide);
+
+const tags = getUniqueTags(posts);
+---
+
+<Layout>
+    <Header />
+    <div class="prose">
+    <h1>Plan du site</h1>
+
+        <h2>Pages</h2>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/a-propos">À propos</a></li>
+        </ul>
+
+
+        <h2>Tags</h2>
+        <ul>
+        {
+            tags.map(tag => (
+                    <li>
+                        <a href={'/tags/' + tag}>{tag}</a>
+                    </li>))
+        }
+        </ul>
+
+        <h2>Articles</h2>
+        <ul>
+        {
+            posts.map(post => (
+                    <li>
+                        <a href={'/blog/' + post.id}>{post.data.title} (<FormattedDate date={post.data.pubDate} />)</a>
+                    </li>))
+        }
+        </ul>
+
+    </div>
+</Layout>
