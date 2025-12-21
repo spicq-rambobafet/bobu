@@ -8,7 +8,9 @@ export default defineConfig({
   site: "https://bobu.man.tf",
   // 部署到 github pages 时，需要设置 base, 自己使用时，可以酌情设置
   base: "/",
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap({
+      filter: (page) => !page.includes("/tags")
+  })],
   markdown: {
     shikiConfig: {
       themes: {
