@@ -9,9 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@ascorbic/bluesky-loader": "^0.1.0",
     "@astrojs/mdx": "^4.0.3",
     "@astrojs/rss": "^4.0.10",
     "@astrojs/sitemap": "^3.6.0",
+    "@atproto/api": "^0.18.8",
     "astro": "^5.2.3",
     "astro-breadcrumbs": "^3.3.3",
     "markdown-it": "^14.1.0",

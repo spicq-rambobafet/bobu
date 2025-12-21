@@ -4,10 +4,14 @@ import { SITE_DESCRIPTION } from "../consts";
 import {getCollection} from "astro:content";
 import Article from "../components/Article.astro";
 import Header from "../components/Header.astro";
+import { AppBskyEmbedImages, AppBskyEmbedRecordWithMedia, AppBskyEmbedExternal } from "@atproto/api";
+import FormattedDate from "../components/FormattedDate.astro";
 
 const posts = (await getCollection("blog", post => !post.data.hide)).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 ).slice(0, 3);
+
+const bskyPosts = await getCollection("bskyPosts");
 
 ---
 
@@ -21,6 +25,7 @@ const posts = (await getCollection("blog", post => !post.data.hide)).sort(
       {SITE_DESCRIPTION}
     </p>
 
+      <section>
       <h2>Derniers articles</h2>
 
       <div class="blog-posts">
@@ -33,5 +38,51 @@ const posts = (await getCollection("blog", post => !post.data.hide)).sort(
               })
           }
       </div>
+      </section>
+
+      <hr />
+
+      <section>
+      <h2>Publications récentes sur Bluesky</h2>
+      <div class="bsky-post">
+          {
+              bskyPosts.map(async (post) => {
+                  const { embed } = post.data;
+                  return (
+                          <article class="bsky__item">
+                              <header>
+                                  {post.data.author.displayName}  - <FormattedDate date={new Date(post.data.record.createdAt)} />
+                              </header>
+                              <div set:html={post.rendered?.html} />
+                              <div>
+                                  {AppBskyEmbedImages.isView(embed)
+                                      ? embed.image.map(
+                                          (image) => image && <img class="bsky__img" width="300" src={image.thumb} alt={image.alt} />
+                                      )
+                                      : undefined}
+                                  {AppBskyEmbedRecordWithMedia.isView(embed) ? (
+                                          <img
+                                                  class="bsky__img"
+                                                  width="300"
+                                                  src={embed.media.external.uri}
+                                                  alt={embed.media.external.description}
+                                          />
+                                  ) : undefined}
+                                  {AppBskyEmbedExternal.isView(embed) ? (
+                                          <strong>{embed.external.title}</strong>
+                                          <img
+                                                  class="bsky__img"
+                                                  width="300"
+                                                  src={embed.external.thumb}
+                                                  alt={embed.external.description}
+                                          />
+                                  ) : undefined}
+                              </div>
+                          </article>
+                  );
+              })
+          }
+      </div>
+      </section>
   </div>
 </Layout>

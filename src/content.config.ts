@@ -1,5 +1,6 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { authorFeedLoader } from "@ascorbic/bluesky-loader";
 
 const blogDataSchema = z.object({
   title: z.string(),
@@ -19,6 +20,14 @@ const blog = defineCollection({
   schema: blogDataSchema,
 });
 
+const bskyPosts = defineCollection({
+    loader: authorFeedLoader({
+        identifier: "man.tf",
+        limit: 3,
+        filter: 'posts_and_author_threads'
+    }),
+});
+
 export type BlogData = z.infer<typeof blogDataSchema>
 
-export const collections = { blog };
+export const collections = { blog, bskyPosts };
