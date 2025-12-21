@@ -1,0 +1,4 @@
+@use "astro-breadcrumbs/breadcrumbs.scss" with (
+  /// Your config goes here
+  $size-font: var(--font-scale)
+);
