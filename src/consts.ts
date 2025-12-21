@@ -21,6 +21,7 @@ export const SEO_CONFIG = {
 export const NAV_ITEMS = [
   { text: "Accueil", link: "/" },
   { text: "Blog", link: "/blog" },
+  { text: "À propos", link: "/a-propos" },
 ];
 
 export const BLOG_CONFIG = {

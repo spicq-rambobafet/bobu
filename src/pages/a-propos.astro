@@ -1,0 +1,35 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from 'astro:assets';
+import PorcoRosso from '../assets/images/porco-rosso.jpg'
+
+---
+
+<Layout>
+    <div class="prose">
+
+        <h1>Qui suis je?</h1>
+
+        <p>
+            Je suis un humain qui aime la pizza, qui apprécie coder contre monnaie sonnante et trébuchante les jours de semaines,
+            et qui fait plein d'autres choses le reste du temps.
+        </p>
+
+        <p>
+            Vous pourriez me retrouver autour d'un <a href="https://fr.wikipedia.org/wiki/Dohy%C5%8D">Dohyō</a>, dans un bal folk,
+            connecté sur Steam, autour d'un jeu de société, ou encore proche des fourneaux.
+        </p>
+
+        <p>
+            Sur ce blog j'écris principalement à propos de mes fixettes du moment, principalement du Sumo donc !
+            <br/>
+            Pas de rythme de publication particulier, simplement quand l'envie m'en prend :)
+        </p>
+
+        <p>
+            Bobu
+        </p>
+
+        <Image src={PorcoRosso} alt="Un cochon pilote (Porco Rosso) saluant depuis son avion" />
+    </div>
+</Layout>

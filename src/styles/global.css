@@ -179,12 +179,22 @@ footer {
 .postSummary {
   display: flex;
   flex-wrap: wrap;
+    position: relative;
 }
 
 .postSummary__title {
   font-size: inherit;
   display: inline-block;
   margin: 0;
+}
+
+.postSummary__link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 .postSummary:not(:last-of-type)::after {

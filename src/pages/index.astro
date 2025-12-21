@@ -1,26 +1,34 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { SITE_DESCRIPTION } from "../consts";
-import { Image } from 'astro:assets';
-import PorcoRosso from '../assets/images/porco-rosso.jpg'
+import {getCollection} from "astro:content";
+import Article from "../components/Article.astro";
+
+const posts = (await getCollection("blog", post => !post.data.hide)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+).slice(0, 3);
 
 ---
 
 <Layout>
   <div class="prose">
+      <h1>Le blog de Bobu</h1>
+
     <p>
       {SITE_DESCRIPTION}
     </p>
-    <p>
-      Je suis un humain qui aime la pizza, qui apprécie coder contre monnaie sonnante et trébuchante les jours de semaines,
-      et qui fait plein d'autres choses le reste du temps.
-    </p>
 
-    <p>
-      Vous pourriez me retrouver autour d'un <a href="https://fr.wikipedia.org/wiki/Dohy%C5%8D">Dohyō</a>, dans un bal folk,
-      connecté sur Steam, autour d'un jeu de société, proche des fourneaux.
-    </p>
+      <h2>Derniers articles</h2>
 
-    <Image src={PorcoRosso} alt="Porco Rosso saluant depuis son avion" />
+      <div class="blog-posts">
+          {
+              posts.map(post => {
+                  return (
+                          <Article
+                                  post={post} />
+                  )
+              })
+          }
+      </div>
   </div>
 </Layout>
