@@ -56,7 +56,7 @@ const bskyPosts = await getCollection("bskyPosts");
                               <div set:html={post.rendered?.html} />
                               <div>
                                   {AppBskyEmbedImages.isView(embed)
-                                      ? embed.image.map(
+                                      ? embed.image?.map(
                                           (image) => image && <img class="bsky__img" width="300" src={image.thumb} alt={image.alt} />
                                       )
                                       : undefined}
