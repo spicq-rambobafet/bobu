@@ -14,7 +14,7 @@ interface Props {
   structuredData?: String;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.url);
+const canonicalURL = new URL(new URL(Astro.request.url).pathname, Astro.url);
 const {
   title,
   description,
