@@ -4,6 +4,8 @@ import { getCollection } from "astro:content";
 import Article from "../../components/Article.astro";
 import { getUniqueTags} from "../../utils";
 import Tags from "../../components/Tags.astro";
+import {Breadcrumbs} from "astro-breadcrumbs";
+import "../../styles/astro-breadcrumbs-config.scss";
 
 const posts = (await getCollection("blog", post => !post.data.hide)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -13,6 +15,23 @@ const tags = getUniqueTags(posts);
 ---
 
 <Layout>
+  <div class="blog__breadcrumbWrapper">
+    <Breadcrumbs ariaLabel="Fil d'arianne" indexText="Accueil">
+      <svg
+          slot="separator"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+      ><polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </Breadcrumbs>
+  </div>
   <nav aria-label="Navigation par tags">
     <Tags tags={tags} />
   </nav>
