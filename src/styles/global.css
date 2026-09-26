@@ -182,6 +182,10 @@ footer {
     position: relative;
 }
 
+.postSummary__date{
+  margin-inline-end: 1.5rem;
+}
+
 .postSummary__title {
   font-size: inherit;
   display: inline-block;
